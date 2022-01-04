@@ -1,0 +1,9 @@
+{
+  "name": "node-express-api-boilerplate",
+  "version": "1.0.0",
+  "description": "A boilerplate for building RESTful APIs in Node.js using express, mongoose, and includes API design, authentication, and deployment.",
+  "main": "index.js",
+  "repository": "https://github.com/NabeelHayat/node-express-api-boilerplate.git",
+  "author": "Nabeel Hayat <nabeel.hayat87@gmail.com>",
+  "license": "MIT"
+}
