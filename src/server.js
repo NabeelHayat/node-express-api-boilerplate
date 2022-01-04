@@ -1,7 +1,5 @@
 import http from 'http';
-import {app} from './app/app';
-
-console.log(app);
+import app from './app/app';
 
 const server = http.createServer(app);
 

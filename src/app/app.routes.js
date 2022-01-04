@@ -1,14 +1,14 @@
 import express from 'express';
 
-export default routes = () => {
-	const routes = express.Router();
+export default routes => {
+	const router = express.Router();
 
-	routes.use('/', (req, res) => {
+	router.use('/', (req, res) => {
 		res.send("Working");
 	});
 
 	/** GET /health-check - Check service health */
-	routes.get('/health-check', (req, res) => res.send('OK'));
+	router.get('/health-check', (req, res) => res.send('OK'));
 
-	return routes;
+	return router;
 };
