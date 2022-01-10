@@ -19,7 +19,7 @@ app.locals.version = config.appVersion;
 
 app.use(morgan('combined', { stream: logStream  }));
 
-// set security HTTP headers
+// set security HTTP headers**+
 app.use(helmet());
 
 // parse json request body
