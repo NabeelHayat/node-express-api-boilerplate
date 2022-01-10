@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
 import Promise from "bluebird";
+
 import config from "../config";
 import { logInfo, logError } from "./logger";
-import { MONGOOSE_CALLBACK_TYPE } from "./enums";
+import { MONGOOSE_CALLBACK_TYPE } from "../helpers/enums";
 
 mongoose.Promise = Promise;
 
