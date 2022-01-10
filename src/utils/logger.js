@@ -55,12 +55,13 @@ if (env !== "production") {
 }
 
 // create a stream object with a 'write' function that will be used by `morgan`
-logger.stream = {
+export const logStream = {
     write: function (message, encoding) {
         // use the 'info' log level so the output will be picked up by both transports (file and console)
-        logger.info(message);
+        winstonlogger.info(message);
     },
 };
+
 
 const Colors = {
     info: "\x1b[36m",
@@ -70,39 +71,38 @@ const Colors = {
 };
 
 const processMessage = (message, colorCode) => {
-    return env === 'development' ? `${colorCode}${message}\x1b[0m` : message;
+    return env !== 'production' ? `${colorCode}${message}\x1b[0m` : message;
 }
 
-export const log = {
-    info: (message) => {
-        logger.info(processMessage(message, Colors.info));
-    },
+const logInfo = (message) => {
+    logger.info(processMessage(message, Colors.info));
+}
 
-    error: (message) => {
-        logger.info(processMessage(message, Colors.error));
-    },
+const logError = (message) => {
+    logger.error(processMessage(message, Colors.error));
+}
 
-    debug: (message) => {
-        logger.info(processMessage(message, Colors.debug));
-    },
+const logDebug =  (message) => {
+    logger.debug(processMessage(message, Colors.debug));
+}
 
-    warn: (message) => {
-        logger.info(processMessage(message, Colors.warn));
-    },
+const logWarn = (message) => {
+    logger.warn(processMessage(message, Colors.warn));
+}
 
-    verbose: (message) => {
-        logger.info(processMessage(message, Colors.verbose));
-    },
+const logVerbose = (message) => {
+    logger.verbose(processMessage(message, Colors.verbose));
+}
 
-    silly: (message) => {
-        logger.info(processMessage(message, Colors.silly));
-    },
+const logSilly = (message) => {
+    logger.silly(processMessage(message, Colors.silly));
+}
 
-    log: (level, message) => {
-        logger.info(processMessage(message, Colors[level]));
-    },
-
-    stream: () => {
-        return logger.stream;
-    }
+export {
+    logInfo,
+    logError,
+    logDebug,
+    logWarn,
+    logVerbose,
+    logSilly
 };
