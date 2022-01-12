@@ -1,4 +1,6 @@
+import httpStatus from "http-status";
 import config from "../config";
+import APIError from "../helpers/APIError";
 import { failureReponse } from "./apiResponse";
 
 /**
@@ -26,17 +28,12 @@ export const errorConverter = (err, req, res, next) => {
 	let error = err;
 
 	if (err instanceof expressValidation.ValidationError) {
-		convertedError = new APIError({
-			message: 'Validation Error',
-			errors: err.errors,
-			status: err.status,
-			stack: err.stack,
-		});
+		error = new APIError('Validation Error', err.status, { stack: err.stack, errors: err.errors });
 	} else if (!(error instanceof ApiError)) {
 		const statusCode =
 			error.statusCode || error instanceof mongoose.Error ? httpStatus.BAD_REQUEST : httpStatus.INTERNAL_SERVER_ERROR;
 		const message = error.message || httpStatus[statusCode];
-		error = new ApiError(statusCode, message, false, err.stack);
+		error = new APIError(message, statusCode, { stack: err.stack });
 	}
 	
 	return errorHandler(error, req, res);
@@ -47,9 +44,7 @@ export const errorConverter = (err, req, res, next) => {
  * @public
  */
 export const notFound = (req, res, next) => {
-	const err = new APIError({
-		message: 'Not found',
-		status: httpStatus.NOT_FOUND,
-	});
+
+	const err = new APIError('not Found', httpStatus.NOT_FOUND, {});
 	return errorHandler(err, req, res);
 };

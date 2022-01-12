@@ -13,6 +13,7 @@ const envVarsSchema = Joi.object()
 		APP_DESCRIPTION: Joi.string().default(''),
 		APP_VERSION: Joi.string().default('1.0.0'),
 		MONGODB_URL: Joi.string().required().description('Mongo DB url'),
+		JWT_SECRET: Joi.string().required().default('---'),
 	})
 	.unknown();
 
@@ -29,8 +30,9 @@ export default {
 	appName: envVars.APP_NAME,
 	appVersion: envVars.APP_VERSION,
 	appDescription: envVars.APP_DESCRIPTION,
+	jwtSecret: envVars.JWT_SECRET,
 	mongoose: {
-		url: envVars.MONGODB_URL + (envVars.NODE_ENV === 'development' ? '-dev' : ''),
+		url: envVars.MONGODB_URL + (envVars.NODE_ENV === 'development' ? '' : ''),
 		options: {
 			useNewUrlParser: true,
 			useUnifiedTopology: true,

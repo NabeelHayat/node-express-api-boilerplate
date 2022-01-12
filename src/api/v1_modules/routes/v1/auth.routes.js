@@ -1,6 +1,6 @@
 import { Router } from 'express';
+import validate from '../../../../middlewares/validate';
 
-import validate from '../../middlewares/validate';
 import { register } from '../../validations/auth.validation';
 
 /**

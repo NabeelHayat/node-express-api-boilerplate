@@ -1,7 +1,7 @@
 import Joi from 'joi';
 import httpStatus from 'http-status';
-import pick from '../utils/pick';
-import APIError from '../utils/APIError';
+import pick from '../helpers/pick';
+import APIError from '../helpers/APIError';
 
 const validate = (schema) => (req, res, next) => {
 	const validSchema = pick(schema, ['params', 'query', 'body']);
@@ -12,7 +12,7 @@ const validate = (schema) => (req, res, next) => {
 
 	if (error) {
 		const errorMessage = error.details.map((details) => details.message).join(', ');
-		return next(new APIError(httpStatus.BAD_REQUEST, errorMessage));
+		return next(new APIError(errorMessage, httpStatus.BAD_REQUEST, {}));
 	}
 	Object.assign(req, value);
 	return next();

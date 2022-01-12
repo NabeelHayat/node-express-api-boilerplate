@@ -2,13 +2,15 @@
  * Role permissions enum
  */
 const Roles = {
-	admin: 'Admin',
-	user: 'User',
+	ADMIN: 'admin',
+	USER: 'user',
+	LOGGED_USER: '_loggedUser',
 
 	map: () => {
 		return [
-			{ value: Roles.user },
-			{ value: Roles.admin }
+			{ value: Roles.USER },
+			{ value: Roles.ADMIN },
+			{ value: Roles.LOGGED_USER },
 		];
 	},
 
@@ -18,6 +20,10 @@ const Roles = {
 			if (item.value === role) valid = true;
 		});
 		return valid;
+	},
+
+	getRoles: () => {
+		return [Roles.ADMIN, Roles.USER, Roles.LOGGED_USER];
 	}
 };
 

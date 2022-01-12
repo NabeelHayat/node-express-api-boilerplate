@@ -1,5 +1,6 @@
 import { Router } from 'express';
 
+import apiRoutes from '../api/routes';
 import config from '../config';
 import { authLimiter } from '../middlewares/apiLimiter';	
 import swaggerSpec from '../utils/swagger';
@@ -15,12 +16,12 @@ if (config.env === 'production') {
 }
 
 // v1 routes
-// router.use('/api/v1', v1Routes);
+router.use('/api', apiRoutes);
 
 /**
  * GET /api/swagger.json
  */
-router.get('/swagger.json', (req, res) => {
+router.get('/api/swagger.json', (req, res) => {
 	res.json(swaggerSpec);
 });
 

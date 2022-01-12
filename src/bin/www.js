@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 
 import app from '../app';
 import config from '../config';
-import { MONGOOSE_CALLBACK_TYPE, PROCESS_ON } from '../utils/enums';
+import { MONGOOSE_CALLBACK_TYPE, PROCESS_ON } from '../helpers/enums';
 import { logError, logInfo } from '../utils/logger';
 import connectMongooseCallback from '../utils/mongoose';
 

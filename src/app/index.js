@@ -2,12 +2,15 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
+import compression from 'compression';
+import session from 'express-session';
+import MongoStore from 'connect-mongo';
 
-import apiRoutes from './app.routes';
+import AuthService from '../shared/auth.service';
+import appRoutes from './app.routes';
 import { logStream } from '../utils/logger';
 import { errorConverter, errorHandler, notFound } from '../middlewares/errorHandler';
 import config from '../config';
-import compression from 'compression';
 
 const app = express();
 
@@ -17,10 +20,9 @@ app.set('host', config.host);
 app.locals.title = config.appName;
 app.locals.version = config.appVersion;
 
-app.use(morgan('combined', { stream: logStream  }));
-
-// set security HTTP headers**+
-app.use(helmet());
+if (config.env === 'development') {
+	app.use(morgan('combined', { stream: logStream  }));
+}
 
 // parse json request body
 app.use(express.json());
@@ -31,12 +33,46 @@ app.use(express.urlencoded({ extended: true }));
 // gzip compression
 app.use(compression());
 
-// enable cors
-app.use(cors());
-app.options('*', cors());
+// set security HTTP headers**+
+app.use(helmet());
+
+// Set "Access-Control-Allow-Origin" header
+app.use(
+	cors({
+		origin: [
+			'http://localhost:3000',
+			'http://localhost:5000',
+		],
+		optionsSuccessStatus: 200,
+		credentials: true,
+	}),
+);
+
+// Enable authentication using session + passport
+app.use(
+	session({
+		secret: config.mongoose.url,
+		resave: false,
+		saveUninitialized: true,
+		store: MongoStore.create({ mongoUrl: config.mongoose.url }),
+		cookie: {
+			maxAge: 1000 * 60 * 60 * 24, // Equals 1 day (1 day * 24 hr/1 day * 60 min/1 hr * 60 sec/1 min * 1000 ms / 1 sec)
+		},
+	}),
+);
+
+/**
+ * -------------- PASSPORT AUTHENTICATION ----------------
+ */
+
+AuthService(app);
+
+/**
+ * -------------- ROUTES ----------------
+ */
 
 // mount all routes
-app.use('/', apiRoutes);
+app.use('/', appRoutes);
 
 // if error is not an instanceOf APIError, convert it.
 app.use(errorConverter);
