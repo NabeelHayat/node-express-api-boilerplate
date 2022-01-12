@@ -6,6 +6,7 @@ import passportLocalMongoose from 'passport-local-mongoose';
 
 import APIError from '../helpers/APIError';
 import Roles from '../helpers/roles';
+import { paginate, toJSON } from '../plugins';
 
 /**
  * User Schema
@@ -38,6 +39,10 @@ const UserSchema = new mongoose.Schema({
  * - validations
  * - virtuals
  */
+
+// add plugin that converts mongoose to json
+UserSchema.plugin(toJSON);
+UserSchema.plugin(paginate);
 
 /**
  * Methods

@@ -120,4 +120,5 @@ export const authLocal = passport.authenticate('local', {
 
 export const authenticateJwt = passport.authenticate('jwt', {
 	session: false,
+	callback
 });
