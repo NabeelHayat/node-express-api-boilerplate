@@ -6,38 +6,56 @@ const UserController = {};
 
 /**
  * Load user and append to req.
+ *
  * @public
+ * @param req
+ * @param res
+ * @param next
+ * @param id
  */
 UserController.load = async (req, res, next, id) => {
 	try {
 		const user = await User.get(id);
+
 		req.locals = { user };
-		return next();
+		
+return next();
 	} catch (error) {
 		return next(error);
 	}
 };
 
 /**
- * Get user
+ * Get user.
+ *
  * @public
+ * @param req
+ * @param res
  */
 UserController.get = (req, res) => res.json(req.locals.user.transform());
 
 /**
- * Get logged in user info
+ * Get logged in user info.
+ *
  * @public
+ * @param req
+ * @param res
  */
 UserController.loggedIn = (req, res) => res.json(req.user.transform());
 
 /**
- * Create new user
+ * Create new user.
+ *
  * @public
+ * @param req
+ * @param res
+ * @param next
  */
 UserController.create = async (req, res, next) => {
 	try {
 		const user = new User(req.body);
 		const savedUser = await user.save();
+
 		res.status(httpStatus.CREATED);
 		res.json(savedUser.transform());
 	} catch (error) {
@@ -46,8 +64,12 @@ UserController.create = async (req, res, next) => {
 };
 
 /**
- * Replace existing user
+ * Replace existing user.
+ *
  * @public
+ * @param req
+ * @param res
+ * @param next
  */
 UserController.replace = async (req, res, next) => {
 	try {
@@ -66,8 +88,12 @@ UserController.replace = async (req, res, next) => {
 };
 
 /**
- * Update existing user
+ * Update existing user.
+ *
  * @public
+ * @param req
+ * @param res
+ * @param next
  */
 UserController.update = (req, res, next) => {
 	const ommitRole = req.locals.user.role !== 'admin' ? 'role' : '';
@@ -80,13 +106,18 @@ UserController.update = (req, res, next) => {
 };
 
 /**
- * Get user list
+ * Get user list.
+ *
  * @public
+ * @param req
+ * @param res
+ * @param next
  */
 UserController.list = async (req, res, next) => {
 	try {
 		const users = await User.list(req.query);
 		const transformedUsers = users.map((user) => user.transform());
+
 		res.json(transformedUsers);
 	} catch (error) {
 		next(error);
@@ -94,8 +125,12 @@ UserController.list = async (req, res, next) => {
 };
 
 /**
- * Delete user
+ * Delete user.
+ *
  * @public
+ * @param req
+ * @param res
+ * @param next
  */
 UserController.remove = (req, res, next) => {
 	const { user } = req.locals;

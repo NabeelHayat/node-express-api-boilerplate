@@ -1,13 +1,13 @@
 #!/usr/bin/env node 
 
 import http from 'http';
-import mongoose from 'mongoose';
+// import mongoose from 'mongoose';
 
 import app from '../app';
 import config from '../config';
-import { MONGOOSE_CALLBACK_TYPE, PROCESS_ON } from '../helpers/enums';
+// import { MONGOOSE_CALLBACK_TYPE, PROCESS_ON } from '../helpers/enums';
 import { logError, logInfo } from '../utils/logger';
-import connectMongooseCallback from '../utils/mongoose';
+// import connectMongooseCallback from '../utils/mongoose';
 
 const port = config.port;
 
@@ -36,48 +36,50 @@ server.on('error', error => {
 });
 
 export const startBootstrap = () => {
-    
-    // First, we would connect to MongoDB, then start HTTP server for listening APIs.
-    connectMongooseCallback((type, dbError, db) => {
-        if (dbError) {
-            throw dbError;
-        }
-
-        switch (type) {
-            case MONGOOSE_CALLBACK_TYPE.CONNECT:
-                server.listen(port, () => {
-                    logInfo(`Server listening on \x1b[32m${port}\x1b[0m`);
-                });
-                break;
-            case MONGOOSE_CALLBACK_TYPE.CONNECT_ERROR:
-                server.close();
-                break;
-            case MONGOOSE_CALLBACK_TYPE.ON_OPEN:
-                // When mongoose connection opens, Do the configuration/settings that you want before starting the server.
-                break;
-            case MONGOOSE_CALLBACK_TYPE.ON_CLOSE:
-                server.close();
-                break
-            case MONGOOSE_CALLBACK_TYPE.ON_ERROR:
-                server.close();
-                break;
-
-            default:
-                break;
-        }
+    server.listen(port, () => {
+        logInfo(`Server listening on \x1b[32m${port}\x1b[0m`);
     });
+    // First, we would connect to MongoDB, then start HTTP server for listening APIs.
+    // connectMongooseCallback((type, dbError, db) => {
+    //     if (dbError) {
+    //         throw dbError;
+    //     }
+
+    //     switch (type) {
+    //         case MONGOOSE_CALLBACK_TYPE.CONNECT:
+    //             server.listen(port, () => {
+    //                 logInfo(`Server listening on \x1b[32m${port}\x1b[0m`);
+    //             });
+    //             break;
+    //         case MONGOOSE_CALLBACK_TYPE.CONNECT_ERROR:
+    //             server.close();
+    //             break;
+    //         case MONGOOSE_CALLBACK_TYPE.ON_OPEN:
+    //             // When mongoose connection opens, Do the configuration/settings that you want before starting the server.
+    //             break;
+    //         case MONGOOSE_CALLBACK_TYPE.ON_CLOSE:
+    //             server.close();
+    //             break
+    //         case MONGOOSE_CALLBACK_TYPE.ON_ERROR:
+    //             server.close();
+    //             break;
+
+    //         default:
+    //             break;
+    //     }
+    // });
 
 };
 
 /**
- * -------------- SERVER ----------------
+ * -------------- SERVER ----------------.
  */
 
-const closeMongooseConnection = () => {
-    mongoose.connection.close(() => {
-        logInfo('Database connection disconnected through app termination');
-    });
-}
+// const closeMongooseConnection = () => {
+//     mongoose.connection.close(() => {
+//         logInfo('Database connection disconnected through app termination');
+//     });
+// }
 
 const exitHandler = () => {
     if (server) {
@@ -97,7 +99,7 @@ const unexpectedErrorHandler = (error) => {
 
 const onSIGEvent = () => {
     // If the Node process ends, Close the Mongoose connection
-    closeMongooseConnection();
+    // closeMongooseConnection();
     if (server) {
         server.close();
     }

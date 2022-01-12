@@ -1,5 +1,5 @@
 /**
- * Role permissions enum
+ * Role permissions enum.
  */
 const Roles = {
 	ADMIN: 'admin',
@@ -16,10 +16,12 @@ const Roles = {
 
 	isValidRole: (role) => {
 		let valid = false;
+
 		Roles.map().forEach((item) => {
 			if (item.value === role) valid = true;
 		});
-		return valid;
+		
+return valid;
 	},
 
 	getRoles: () => {

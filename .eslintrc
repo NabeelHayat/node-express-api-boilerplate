@@ -1,0 +1,65 @@
+{
+	"env": {
+		"es6": true,
+		"node": true,
+		"mocha": true
+	},
+	"extends": [
+		"eslint-config-leapfrog",
+		"prettier"
+	],
+	"parserOptions": {
+		"ecmaVersion": 2018,
+		"sourceType": "module"
+	},
+	"rules": {
+		"camelcase": [
+			"error",
+			{
+				"properties": "never"
+			}
+		],
+		"no-console": 0,
+		"no-underscore-dangle": 0,
+		"no-unused-vars": [
+			"error",
+			{
+				"argsIgnorePattern": "next"
+			}
+		],
+		"no-use-before-define": [
+			"error",
+			{
+				"variables": false
+			}
+		],
+		"no-multi-str": 0,
+		"no-mixed-spaces-and-tabs": 0,
+		"max-len": [
+			"warn",
+			{
+				"code": 120,
+				"tabWidth": 2,
+				"comments": 180,
+				"ignoreComments": false,
+				"ignoreTrailingComments": true,
+				"ignoreUrls": true,
+				"ignoreStrings": true,
+				"ignoreTemplateLiterals": true,
+				"ignoreRegExpLiterals": true
+			}
+		],
+		"jsdoc/require-description-complete-sentence": 0,
+		"jsdoc/require-param-type": 0,
+		"jsdoc/require-param-name": 0,
+		"jsdoc/check-param-names": 0,
+		"jsdoc/require-param": 0,
+		"jsdoc/valid-types": 0,
+		"require-jsdoc": 0,
+		"jsdoc/check-tag-names": 0
+	},
+	"plugins": [
+		"jsdoc",
+		"node"
+	]
+}

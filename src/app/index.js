@@ -62,13 +62,13 @@ app.use(
 );
 
 /**
- * -------------- PASSPORT AUTHENTICATION ----------------
+ * -------------- PASSPORT AUTHENTICATION ----------------.
  */
 
 AuthService(app);
 
 /**
- * -------------- ROUTES ----------------
+ * -------------- ROUTES ----------------.
  */
 
 // mount all routes

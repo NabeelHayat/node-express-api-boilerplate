@@ -38,7 +38,7 @@ const options = {
 };
 
 // instantiate a new Winston Logger with the settings defined above
-let logger = new winston.createLogger({
+const logger = new winston.createLogger({
     transports: [
         
         new winston.transports.File(options.file),
@@ -56,9 +56,10 @@ if (env !== "production") {
 
 // create a stream object with a 'write' function that will be used by `morgan`
 export const logStream = {
+    // eslint-disable-next-line no-unused-vars
     write: function (message, encoding) {
         // use the 'info' log level so the output will be picked up by both transports (file and console)
-        winstonlogger.info(message);
+        logger.info(message);
     },
 };
 

@@ -1,7 +1,7 @@
 import express from 'express';
 
-import { ADMIN, LOGGED_USER, authorize } from '../../middlewares/authenticate';
-import validate from '../../middlewares/validate';
+import { ADMIN, LOGGED_USER, authorize } from '../../../middlewares/authenticate';
+import validate from '../../../middlewares/validate';
 
 const controller = require('../../controllers/user.controller');
 const {
@@ -14,7 +14,7 @@ const {
 const router = express.Router();
 
 /**
- * Load user when API with userId route parameter is hit
+ * Load user when API with userId route parameter is hit.
  */
 router.param('userId', controller.load);
 

@@ -35,6 +35,7 @@ export default (callback) => {
         const error = new Error(
         `unable to connect to database: ${config.mongoose.url}`
         );
+
         callback(MONGOOSE_CALLBACK_TYPE.ON_ERROR, error, null);
     });
 

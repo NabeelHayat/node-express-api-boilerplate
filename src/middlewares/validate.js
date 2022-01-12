@@ -12,10 +12,13 @@ const validate = (schema) => (req, res, next) => {
 
 	if (error) {
 		const errorMessage = error.details.map((details) => details.message).join(', ');
-		return next(new APIError(errorMessage, httpStatus.BAD_REQUEST, {}));
+
+		
+return next(new APIError(errorMessage, httpStatus.BAD_REQUEST, {}));
 	}
 	Object.assign(req, value);
-	return next();
+	
+return next();
 };
 
 export default validate;

@@ -9,7 +9,7 @@ import Roles from '../helpers/roles';
 import { paginate, toJSON } from '../plugins';
 
 /**
- * User Schema
+ * User Schema.
  */
 const UserSchema = new mongoose.Schema({
 	_id: { type: String, default: _ => uuidv1() },
@@ -37,7 +37,7 @@ const UserSchema = new mongoose.Schema({
  * Add your
  * - pre-save hooks
  * - validations
- * - virtuals
+ * - virtuals.
  */
 
 // add plugin that converts mongoose to json
@@ -45,20 +45,17 @@ UserSchema.plugin(toJSON);
 UserSchema.plugin(paginate);
 
 /**
- * Methods
+ * Methods.
  */
-UserSchema.method({
-	authenticateUser(password) {
-		return compareSync(password, this.password);
-	},
-});
+UserSchema.method({});
 
 /**
- * Statics
+ * Statics.
  */
 UserSchema.statics = {
 	/**
-	 * Get user
+	 * Get user.
+	 *
 	 * @param {ObjectId} id - The objectId of user.
 	 * @returns {Promise<User, APIError>}
 	 */
@@ -70,30 +67,38 @@ UserSchema.statics = {
 	        return user;
 	      }
 	      const err = new APIError('No such user exists!', httpStatus.NOT_FOUND, {});
-	      return Promise.reject(err);
+
+	      
+return Promise.reject(err);
 	    });
 	},
 
 	/**
-	 * Get user by email
+	 * Get user by email.
+	 *
 	 * @param {String} email - The string of user.
 	 * @returns {Promise<User, APIError>}
 	 */
 	getByEmail(email) {
 		const regex = new RegExp(`${email}`, 'i');
-		return this.findOne({ email: { $regex: regex } })
+
+		
+return this.findOne({ email: { $regex: regex } })
 			.exec()
 			.then(user => {
 				if (user) {
 					return user;
 				}
 				const err = new APIError('No such user exists!', httpStatus.NOT_FOUND, {});
-				return Promise.reject(err);
+
+				
+return Promise.reject(err);
 			});
 	},
 
 	/**
-	 * Get user by phoneNumber
+	 * Get user by phoneNumber.
+	 *
 	 * @param {String} phoneNumber - The string of user.
 	 * @returns {Promise<User, APIError>}
 	 */
@@ -105,12 +110,15 @@ UserSchema.statics = {
 					return user;
 				}
 				const err = new APIError('No such user exists!', httpStatus.NOT_FOUND, {});
-				return Promise.reject(err);
+
+				
+return Promise.reject(err);
 			});
 	},
 
 	/**
-	 * Get user by userId
+	 * Get user by userId.
+	 *
 	 * @param {String} userId - The string id of user.
 	 * @returns {Promise<User, APIError>}
 	 */
@@ -122,14 +130,117 @@ UserSchema.statics = {
 					return user;
 				}
 				const err = new APIError('No such user exists!', httpStatus.NOT_FOUND, {});
-				return Promise.reject(err);
+
+				
+return Promise.reject(err);
 			});
 	},
 
 	/**
-	 * List users in descending order of 'createdAt' timestamp.
-	 * @param {number} skip - Number of users to be skipped.
-	 * @param {number} limit - Limit number of users to be returned.
+	 * List users in descending order of 'createdAt' timestamp,Skip Number of users to be skipped, 
+	 * Limit number of users to be returned.
+	 *
+	 * @param {object} {skip, limit}
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
+	 * @param {skip,.skip
+	 * @param {skip,.limit
 	 * @returns {Promise<User[]>}
 	 */
 	list({ skip = 0, limit = 50 } = {}) {

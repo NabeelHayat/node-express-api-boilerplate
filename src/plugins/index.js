@@ -1,2 +1,4 @@
-export * from './paginate.plugin';
-export * from './toJson.plugin';
+import paginate from './paginate.plugin';
+import toJSON from './toJson.plugin';
+
+export { paginate, toJSON };

@@ -11,7 +11,7 @@ import config from '../config';
 export default (app) => {
 
 	/**
-		 * -------------- PASSPORT AUTHENTICATION ----------------
+		 * -------------- PASSPORT AUTHENTICATION ----------------.
 		 */
 	/**
 	 * Notice that these middlewares are initialized after the `express-session` middleware.  This is because
@@ -57,6 +57,7 @@ export default (app) => {
 			const user = await User.findOne({
 				email,
 			});
+
 			if (!user) {
 				return done(null, false, {
 					message: 'This email is not registered.',
@@ -86,7 +87,8 @@ export default (app) => {
 			if (!user) {
 				return done(null, false);
 			}
-			return done(null, user);
+			
+return done(null, user);
 		} catch (e) {
 			return done(e, false);
 		}
@@ -99,7 +101,7 @@ export default (app) => {
 
 	/**
 	 * This function is used in conjunction with the `passport.authenticate()` method.  See comments in
-	 * `passport.use()` above ^^ for explanation
+	 * `passport.use()` above ^^ for explanation.
 	 */
 	passport.serializeUser(User.serializeUser());
 
@@ -118,7 +120,7 @@ export const authLocal = passport.authenticate('local', {
 	session: false,
 });
 
-export const authenticateJwt = passport.authenticate('jwt', {
+export const authenticateJwt = (callback) => passport.authenticate('jwt', {
 	session: false,
 	callback
 });

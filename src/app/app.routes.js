@@ -19,14 +19,14 @@ if (config.env === 'production') {
 router.use('/api', apiRoutes);
 
 /**
- * GET /api/swagger.json
+ * GET /api/swagger.json.
  */
 router.get('/api/swagger.json', (req, res) => {
 	res.json(swaggerSpec);
 });
 
 /**
- * GET /
+ * GET /.
  */
 router.get('/', (req, res) => {
 	res.json({

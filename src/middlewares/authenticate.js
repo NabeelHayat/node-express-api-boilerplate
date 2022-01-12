@@ -1,5 +1,4 @@
 import httpStatus from "http-status";
-import passport from 'passport';
 import Promise from "bluebird";
 
 import Roles from "../helpers/roles";
@@ -25,12 +24,14 @@ const handleJwt = (req, res, next, roles) => async (err, user, info) => {
         if (user.role !== Roles.ADMIN && req.params.userId !== user._id.toString()) {
             apiError.status = httpStatus.FORBIDDEN;
             apiError.message = 'Forbidden';
-            return next(apiError);
+            
+return next(apiError);
         }
     } else if (!roles.includes(user.role)) {
         apiError.status = httpStatus.FORBIDDEN;
         apiError.message = 'Forbidden';
-        return next(apiError);
+        
+return next(apiError);
     } else if (err || !user) {
         return next(apiError);
     }

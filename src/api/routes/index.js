@@ -9,7 +9,7 @@ const router = Router();
 router.use('/v1', v1Router);
 
 /**
- * GET v1/status
+ * GET v1/status.
  */
 router.get('/status', (req, res) => res.send('OK'));
 

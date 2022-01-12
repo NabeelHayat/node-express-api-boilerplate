@@ -1,5 +1,6 @@
 /**
  * Enum for mongoose callback.
+ *
  * @readonly
  * @enum {string}
  */
@@ -12,7 +13,8 @@ export const MONGOOSE_CALLBACK_TYPE = Object.freeze({
 });
 
 /**
- * Enum for node process events
+ * Enum for node process events.
+ *
  * @readonly
  * @enum {string}
  */
