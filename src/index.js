@@ -1,3 +1,5 @@
 import { startBootstrap } from './bin/www.js';
 
-startBootstrap();
+startBootstrap({
+  dbConnection: false
+});

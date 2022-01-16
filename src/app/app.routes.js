@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import apiRoutes from '../api/routes';
 import config from '../config';
-import { authLimiter } from '../middlewares/apiLimiter';	
+import { authLimiter } from '../middlewares/apiLimiter';
 import swaggerSpec from '../utils/swagger';
 
 /**
