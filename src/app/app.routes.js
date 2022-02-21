@@ -1,7 +1,7 @@
+require('./config/config');
 import { Router } from 'express';
-
 import apiRoutes from '../api/routes';
-import config from '../config';
+import nconf from 'nconf';
 import { authLimiter } from '../middlewares/apiLimiter';
 import swaggerSpec from '../utils/swagger';
 
@@ -11,8 +11,8 @@ import swaggerSpec from '../utils/swagger';
 const router = Router();
 
 // limit repeated failed requests to auth endpoints
-if (config.env === 'production') {
-	router.use('/api/v1/auth', authLimiter);
+if (nconf.env === 'production') {
+    router.use('/api/v1/auth', authLimiter);
 }
 
 // v1 routes
@@ -22,17 +22,17 @@ router.use('/api', apiRoutes);
  * GET /api/swagger.json.
  */
 router.get('/api/swagger.json', (req, res) => {
-	res.json(swaggerSpec);
+    res.json(swaggerSpec);
 });
 
 /**
  * GET /.
  */
 router.get('/', (req, res) => {
-	res.json({
-		app: req.app.locals.title,
-		apiVersion: req.app.locals.version
-	});
+    res.json({
+        app: req.app.locals.title,
+        apiVersion: req.app.locals.version
+    });
 });
 
 /** GET /health-check - Check service health */

@@ -1,33 +1,32 @@
 import path from 'path';
 import swaggerJSDoc from 'swagger-jsdoc';
-
-import config from '../config';
-
+require('../config');
+import nconf from 'nconf';
 /**
  * Swagger definition.
  */
 const swaggerDefinition = {
-	info: {
-		title: config.appName,
-		version: config.appVersion,
-		description: config.appDescription
-	},
-	basePath: '/api'
+    info: {
+        title: nconf.app.name,
+        version: nconf.app.version,
+        description: nconf.app.description
+    },
+    basePath: '/api'
 };
 
 /**
  * Options for the swagger docs.
  */
 const swaggerOptions = {
-	// import swaggerDefinitions
-	swaggerDefinition: swaggerDefinition,
-	// path to the API docs
-	apis: [
-		path.join(__dirname, '/../routes.js'),
-		path.join(__dirname, '/../docs/*.js'),
-		path.join(__dirname, '/../docs/*.yml'),
-		path.join(__dirname, '/../docs/*.yaml')
-	]
+    // import swaggerDefinitions
+    swaggerDefinition: swaggerDefinition,
+    // path to the API docs
+    apis: [
+        path.join(__dirname, '/../routes.js'),
+        path.join(__dirname, '/../docs/*.js'),
+        path.join(__dirname, '/../docs/*.yml'),
+        path.join(__dirname, '/../docs/*.yaml')
+    ]
 };
 
 /**

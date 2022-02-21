@@ -8,10 +8,10 @@
   "scripts": {
     "start": "yarn prod",
     "build": "npm-run-all clean transpile",
-    "server": "node compiled",
+    "server": "node compiled/index.js",
     "debug": "nodemon --watch .env --watch src --exec babel-node src --source-maps",
     "dev": "NODE_ENV=development npm-run-all build debug",
-    "prod": "NODE_ENV=production npm-run-all build server",
+    "prod": "NODE_ENV=development npm-run-all build server",
     "transpile": "babel src --copy-files --out-dir compiled --source-maps",
     "clean": "rimraf compiled",
     "watch:dev": "nodemon",
@@ -32,6 +32,7 @@
   "dependencies": {
     "bluebird": "^3.7.2",
     "compression": "^1.7.4",
+    "config": "^3.3.7",
     "connect-mongo": "^4.6.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
@@ -46,6 +47,7 @@
     "mongoose": "^6.1.4",
     "morgan": "^1.10.0",
     "nanoid": "^3.1.32",
+    "nconf": "^0.11.3",
     "passport": "^0.5.2",
     "passport-jwt": "^4.0.0",
     "passport-local-mongoose": "^6.1.0",

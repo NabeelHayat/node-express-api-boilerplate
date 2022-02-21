@@ -5,22 +5,22 @@ import helmet from 'helmet';
 import compression from 'compression';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
+import nconf from 'nconf';
 
 import AuthService from '../shared/auth.service';
 import appRoutes from './app.routes';
 import { logStream } from '../utils/logger';
 import { errorConverter, errorHandler, notFound } from '../middlewares/errorHandler';
-import config from '../config';
 
 const app = express();
 
-app.set('port', config.port);
-app.set('host', config.host);
+app.set('port', nconf.app.port);
+app.set('host', nconf.app.host);
 
-app.locals.title = config.appName;
-app.locals.version = config.appVersion;
+app.locals.title = nconf.app.name;
+app.locals.version = nconf.app.version;
 
-if (config.env === 'development') {
+if (nconf.env === 'development') {
 	app.use(morgan('combined', { stream: logStream  }));
 }
 
@@ -40,6 +40,7 @@ app.use(helmet());
 app.use(
 	cors({
 		origin: [
+			`http://${nconf.app.host}:${nconf.app.port}`,
 			'http://localhost:3000',
 			'http://localhost:5000',
 		],
@@ -51,10 +52,10 @@ app.use(
 // Enable authentication using session + passport
 app.use(
 	session({
-		secret: config.mongoose.url,
+		secret: nconf.mongoose.url,
 		resave: false,
 		saveUninitialized: true,
-		store: MongoStore.create({ mongoUrl: config.mongoose.url }),
+		store: MongoStore.create({ mongoUrl: nconf.mongoose.url }),
 		cookie: {
 			maxAge: 1000 * 60 * 60 * 24, // Equals 1 day (1 day * 24 hr/1 day * 60 min/1 hr * 60 sec/1 min * 1000 ms / 1 sec)
 		},
@@ -62,13 +63,13 @@ app.use(
 );
 
 /**
- * -------------- PASSPORT AUTHENTICATION ----------------.
+ * -------------- PASSPORT AUTHENTICATION ----------------
  */
 
 AuthService(app);
 
 /**
- * -------------- ROUTES ----------------.
+ * -------------- ROUTES ----------------
  */
 
 // mount all routes

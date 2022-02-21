@@ -10,8 +10,8 @@ import controller from '../../v1_modules/auth/auth.controller';
 const router = Router();
 
 router
-	.route('/register')
-	/** GET /api/v1/auth/register - Register users */
-	.get(validate(register), controller.register);
+    .route('/register')
+    /** GET /api/v1/auth/register - Register users */
+    .get(validate(register), controller.register);
 
 export default router;

@@ -2,31 +2,27 @@
  * Role permissions enum.
  */
 const Roles = {
-	ADMIN: 'admin',
-	USER: 'user',
-	LOGGED_USER: '_loggedUser',
+    ADMIN: 'admin',
+    USER: 'user',
+    LOGGED_USER: '_loggedUser',
 
-	map: () => {
-		return [
-			{ value: Roles.USER },
-			{ value: Roles.ADMIN },
-			{ value: Roles.LOGGED_USER },
-		];
-	},
+    map: () => {
+        return [{ value: Roles.USER }, { value: Roles.ADMIN }, { value: Roles.LOGGED_USER }];
+    },
 
-	isValidRole: (role) => {
-		let valid = false;
+    isValidRole: (role) => {
+        let valid = false;
 
-		Roles.map().forEach((item) => {
-			if (item.value === role) valid = true;
-		});
-		
-return valid;
-	},
+        Roles.map().forEach((item) => {
+            if (item.value === role) valid = true;
+        });
 
-	getRoles: () => {
-		return [Roles.ADMIN, Roles.USER, Roles.LOGGED_USER];
-	}
+        return valid;
+    },
+
+    getRoles: () => {
+        return [Roles.ADMIN, Roles.USER, Roles.LOGGED_USER];
+    }
 };
 
 export default Roles;

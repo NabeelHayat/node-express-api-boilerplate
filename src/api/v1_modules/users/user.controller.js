@@ -14,15 +14,15 @@ const UserController = {};
  * @param id
  */
 UserController.load = async (req, res, next, id) => {
-	try {
-		const user = await User.get(id);
+    try {
+        const user = await User.get(id);
 
-		req.locals = { user };
-		
-return next();
-	} catch (error) {
-		return next(error);
-	}
+        req.locals = { user };
+
+        return next();
+    } catch (error) {
+        return next(error);
+    }
 };
 
 /**
@@ -52,15 +52,15 @@ UserController.loggedIn = (req, res) => res.json(req.user.transform());
  * @param next
  */
 UserController.create = async (req, res, next) => {
-	try {
-		const user = new User(req.body);
-		const savedUser = await user.save();
+    try {
+        const user = new User(req.body);
+        const savedUser = await user.save();
 
-		res.status(httpStatus.CREATED);
-		res.json(savedUser.transform());
-	} catch (error) {
-		next(User.checkDuplicateEmail(error));
-	}
+        res.status(httpStatus.CREATED);
+        res.json(savedUser.transform());
+    } catch (error) {
+        next(User.checkDuplicateEmail(error));
+    }
 };
 
 /**
@@ -72,19 +72,19 @@ UserController.create = async (req, res, next) => {
  * @param next
  */
 UserController.replace = async (req, res, next) => {
-	try {
-		const { user } = req.locals;
-		const newUser = new User(req.body);
-		const ommitRole = user.role !== 'admin' ? 'role' : '';
-		const newUserObject = omit(newUser.toObject(), '_id', ommitRole);
+    try {
+        const { user } = req.locals;
+        const newUser = new User(req.body);
+        const ommitRole = user.role !== 'admin' ? 'role' : '';
+        const newUserObject = omit(newUser.toObject(), '_id', ommitRole);
 
-		await user.updateOne(newUserObject, { override: true, upsert: true });
-		const savedUser = await User.findById(user._id);
+        await user.updateOne(newUserObject, { override: true, upsert: true });
+        const savedUser = await User.findById(user._id);
 
-		res.json(savedUser.transform());
-	} catch (error) {
-		next(User.checkDuplicateEmail(error));
-	}
+        res.json(savedUser.transform());
+    } catch (error) {
+        next(User.checkDuplicateEmail(error));
+    }
 };
 
 /**
@@ -96,13 +96,13 @@ UserController.replace = async (req, res, next) => {
  * @param next
  */
 UserController.update = (req, res, next) => {
-	const ommitRole = req.locals.user.role !== 'admin' ? 'role' : '';
-	const updatedUser = omit(req.body, ommitRole);
-	const user = Object.assign(req.locals.user, updatedUser);
+    const ommitRole = req.locals.user.role !== 'admin' ? 'role' : '';
+    const updatedUser = omit(req.body, ommitRole);
+    const user = Object.assign(req.locals.user, updatedUser);
 
-	user.save()
-		.then((savedUser) => res.json(savedUser.transform()))
-		.catch((e) => next(User.checkDuplicateEmail(e)));
+    user.save()
+        .then((savedUser) => res.json(savedUser.transform()))
+        .catch((e) => next(User.checkDuplicateEmail(e)));
 };
 
 /**
@@ -114,14 +114,14 @@ UserController.update = (req, res, next) => {
  * @param next
  */
 UserController.list = async (req, res, next) => {
-	try {
-		const users = await User.list(req.query);
-		const transformedUsers = users.map((user) => user.transform());
+    try {
+        const users = await User.list(req.query);
+        const transformedUsers = users.map((user) => user.transform());
 
-		res.json(transformedUsers);
-	} catch (error) {
-		next(error);
-	}
+        res.json(transformedUsers);
+    } catch (error) {
+        next(error);
+    }
 };
 
 /**
@@ -133,11 +133,11 @@ UserController.list = async (req, res, next) => {
  * @param next
  */
 UserController.remove = (req, res, next) => {
-	const { user } = req.locals;
+    const { user } = req.locals;
 
-	user.remove()
-		.then(() => res.status(httpStatus.NO_CONTENT).end())
-		.catch((e) => next(e));
+    user.remove()
+        .then(() => res.status(httpStatus.NO_CONTENT).end())
+        .catch((e) => next(e));
 };
 
 export default UserController;

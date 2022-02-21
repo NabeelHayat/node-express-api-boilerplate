@@ -1,51 +1,51 @@
 {
-	"version": "0.2.0",
-	"configurations": [
-		{
-			"type": "node",
-			"request": "launch",
-			"name": "Launch Debug Program",
-			"preLaunchTask": "build",
-			"program": "${workspaceFolder}/compiled/bin/www.js",
-			"sourceMaps": true,
-			"runtimeExecutable": "${workspaceRoot}/node_modules/.bin/nodemon"
-		},
-		{
-			"name": "Launch",
-			"type": "node",
-			"request": "launch",
-			"program": "${workspaceRoot}/dist/bin/www.js",
-			"stopOnEntry": false,
-			"args": [],
-			"cwd": "${workspaceRoot}",
-			"preLaunchTask": null,
-			"runtimeExecutable": null,
-			"env": {
-				"NODE_ENV": "development"
-			},
-			"console": "internalConsole",
-			"sourceMaps": true,
-			"outFiles": ["${workspaceRoot}/dist/**/*.js"]
-		},
-		{
-			"name": "Attach",
-			"type": "node",
-			"request": "attach",
-			"port": 5858,
-			"address": "localhost",
-			"restart": false,
-			"sourceMaps": false,
-			"outFiles": [],
-			"localRoot": "${workspaceRoot}",
-			"remoteRoot": null
-		},
-		{
-			"name": "Attach to Process",
-			"type": "node",
-			"request": "attach",
-			"port": 5858,
-			"sourceMaps": false,
-			"outFiles": []
-		}
-	]
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Debug Program",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/compiled/bin/www.js",
+            "sourceMaps": true,
+            "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/nodemon"
+        },
+        {
+            "name": "Launch",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/dist/bin/www.js",
+            "stopOnEntry": false,
+            "args": [],
+            "cwd": "${workspaceRoot}",
+            "preLaunchTask": null,
+            "runtimeExecutable": null,
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "console": "internalConsole",
+            "sourceMaps": true,
+            "outFiles": ["${workspaceRoot}/dist/**/*.js"]
+        },
+        {
+            "name": "Attach",
+            "type": "node",
+            "request": "attach",
+            "port": 5858,
+            "address": "localhost",
+            "restart": false,
+            "sourceMaps": false,
+            "outFiles": [],
+            "localRoot": "${workspaceRoot}",
+            "remoteRoot": null
+        },
+        {
+            "name": "Attach to Process",
+            "type": "node",
+            "request": "attach",
+            "port": 5858,
+            "sourceMaps": false,
+            "outFiles": []
+        }
+    ]
 }
