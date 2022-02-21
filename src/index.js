@@ -1,4 +1,4 @@
-require('./config/config');
+require('./config/loadConfig');
 const { startBootstrap } = require('./bin/www.js');
 
 startBootstrap({

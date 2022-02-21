@@ -43,8 +43,6 @@ module.exports.startBootstrap = (options = {}) => {
 
     Object.assign(opts, options);
 
-    console.log(opts);
-
     // If the db connection value is true, than first connect to the Db. otherwise the http server will start.
     if (opts.dbConnection) {
         dbConnection();

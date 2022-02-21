@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start": "yarn prod",
-    "dev": "NODE_ENV=development ./node_modules/nodemon/bin/nodemon.js  src/index.js",
+    "dev": "NODE_ENV=development node  src/index.js",
     "prod": "NODE_ENV=production node src/index.js",
     "watch:dev": "nodemon",
     "prepare": "husky install",

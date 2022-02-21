@@ -1,7 +1,6 @@
 require('dotenv').config();
 
 let dir = `${process.cwd()}/src/config/`; // ideally this should be first line before any other module acceess config
-console.log("dir", dir);
 process.env.NODE_CONFIG_DIR = dir;
 
 const config = require('config');
