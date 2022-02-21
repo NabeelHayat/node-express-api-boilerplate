@@ -1,16 +1,12 @@
 const { Router } = require('express');
-const v1Router = require('./v1');
+const authRouter = require('./routes/auth.routes');
 
 const router = Router();
 
 // ---------------------------------------------------------
-// V1 routes
+// Auth routes
 // ---------------------------------------------------------
-router.use('/v1', v1Router);
+router.use('/auth', authRouter);
 
-/**
- * GET v1/status.
- */
-router.get('/status', (req, res) => res.send('OK'));
+module.exports = router;
 
-module.exports =  router;

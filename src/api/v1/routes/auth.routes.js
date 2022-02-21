@@ -1,8 +1,8 @@
 const { Router } = require('express');
 
 const validate = require('../../../middlewares/validate');
-const { register } = require('../../v1_modules/validations/auth.validation');
-const controller = require('../../v1_modules/auth/auth.controller');
+const { register } = require('../validations/auth.validation');
+const controller = require('../authentication/auth.controller');
 
 /**
  * Contains all Authentication routes for the application.
