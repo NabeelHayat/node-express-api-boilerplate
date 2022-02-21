@@ -4,7 +4,7 @@
  * @readonly
  * @enum {string}
  */
-export const MONGOOSE_CALLBACK_TYPE = Object.freeze({
+module.exports.MONGOOSE_CALLBACK_TYPE = Object.freeze({
     CONNECT: 'connect',
     CONNECT_ERROR: 'connect_error',
     ON_OPEN: 'open',
@@ -18,7 +18,7 @@ export const MONGOOSE_CALLBACK_TYPE = Object.freeze({
  * @readonly
  * @enum {string}
  */
-export const PROCESS_ON = Object.freeze({
+module.exports.PROCESS_ON = Object.freeze({
     SIGINT: 'SIGINT',
     SIGTERM: 'SIGTERM',
     UNCAUGHTEXCEPTION: 'uncaughtException',

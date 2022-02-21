@@ -1,7 +1,7 @@
-import httpStatus from 'http-status';
-import { omit } from 'lodash';
+const httpStatus = require('http-status');
+const { omit } = require('lodash');
 
-import User from '../../../models/user.model';
+const User = require('../../../models/user.model');
 
 const AuthController = {};
 
@@ -28,4 +28,4 @@ AuthController.register = async (req, res, next) => {
     }
 };
 
-export default AuthController;
+module.exports =  AuthController;

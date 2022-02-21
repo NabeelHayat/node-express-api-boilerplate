@@ -1,16 +1,14 @@
 #!/usr/bin/env node
 
-import http from 'http';
-import mongoose from 'mongoose';
+const http = require('http');
+const mongoose = require('mongoose');
 
-require('../config');
+const config = require('config');
 
-import config from 'config';
-
-import app from '../app';
-import { MONGOOSE_CALLBACK_TYPE, PROCESS_ON } from '../helpers/enums';
-import { logError, logInfo } from '../utils/logger';
-import connectMongooseCallback from '../utils/mongoose';
+const app = require('../app');
+const { MONGOOSE_CALLBACK_TYPE, PROCESS_ON } = require('../helpers/enums');
+const { logError, logInfo } = require('../utils/logger');
+const connectMongooseCallback = require('../utils/mongoose');
 
 const port = config.app.port;
 
@@ -38,7 +36,7 @@ server.on('error', (error) => {
     }
 });
 
-export const startBootstrap = (options = {}) => {
+module.exports.startBootstrap = (options = {}) => {
     const opts = {
         dbConnection: true
     };

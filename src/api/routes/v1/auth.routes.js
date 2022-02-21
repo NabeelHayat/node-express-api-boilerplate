@@ -1,8 +1,8 @@
-import { Router } from 'express';
+const { Router } = require('express');
 
-import validate from '../../../middlewares/validate';
-import { register } from '../../v1_modules/validations/auth.validation';
-import controller from '../../v1_modules/auth/auth.controller';
+const validate = require('../../../middlewares/validate');
+const { register } = require('../../v1_modules/validations/auth.validation');
+const controller = require('../../v1_modules/auth/auth.controller');
 
 /**
  * Contains all Authentication routes for the application.
@@ -14,4 +14,4 @@ router
     /** GET /api/v1/auth/register - Register users */
     .get(validate(register), controller.register);
 
-export default router;
+module.exports =  router;

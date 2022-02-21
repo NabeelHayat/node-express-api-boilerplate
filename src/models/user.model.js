@@ -1,18 +1,18 @@
 /* eslint-disable no-unused-vars */
-import mongoose from 'mongoose';
-import httpStatus from 'http-status';
-import { v1 as uuidv1 } from 'uuid';
-import passportLocalMongoose from 'passport-local-mongoose';
+const mongoose = require('mongoose');
+const httpStatus = require('http-status');
+const nanoid = require('nanoid');
+const passportLocalMongoose = require('passport-local-mongoose');
 
-import APIError from '../helpers/APIError';
-import Roles from '../helpers/roles';
-import { paginate, toJSON } from '../plugins';
+const APIError = require('../helpers/APIError');
+const Roles = require('../helpers/roles');
+const { paginate, toJSON } = require('../plugins');
 
 /**
  * User Schema.
  */
 const UserSchema = new mongoose.Schema({
-    _id: { type: String, default: (_) => uuidv1() },
+    _id: { type: String, default: (_) => nanoid() },
     email: {
         type: String,
         required: true,
@@ -248,4 +248,4 @@ UserSchema.plugin(passportLocalMongoose, { usernameField: 'email' });
 /**
  * @typedef User
  */
-export default mongoose.model('User', UserSchema);
+module.exports =  mongoose.model('User', UserSchema);

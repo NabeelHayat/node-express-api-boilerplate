@@ -1,5 +1,5 @@
-import httpStatus from 'http-status';
-import APIError from '../helpers/APIError';
+const httpStatus = require('http-status');
+const APIError = require('../helpers/APIError');
 
 const paginate = (schema) => {
     /**
@@ -76,4 +76,4 @@ const paginate = (schema) => {
     };
 };
 
-export default paginate;
+module.exports =  paginate;

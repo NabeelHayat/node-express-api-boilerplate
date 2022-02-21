@@ -1,15 +1,15 @@
-import mongoose from 'mongoose';
-import Promise from 'bluebird';
+const mongoose = require('mongoose');
+const Promise = require('bluebird');
 
-import nconf from 'nconf';
-import { logInfo, logError } from './logger';
-import { MONGOOSE_CALLBACK_TYPE } from '../helpers/enums';
+const config = require('config');
+const { logInfo, logError } = require('./logger');
+const { MONGOOSE_CALLBACK_TYPE } = require('../helpers/enums');
 
-const { url, options, debug } = nconf.mongoose;
+const { url, options, debug } = config.mongoose;
 
 mongoose.Promise = Promise;
 
-export default (callback) => {
+module.exports = (callback) => {
     mongoose
         .connect(url, options)
         .then((x) => {

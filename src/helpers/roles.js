@@ -25,4 +25,4 @@ const Roles = {
     }
 };
 
-export default Roles;
+module.exports =  Roles;

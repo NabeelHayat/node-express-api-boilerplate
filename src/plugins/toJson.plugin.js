@@ -40,4 +40,4 @@ const toJSON = (schema) => {
     });
 };
 
-export default toJSON;
+module.exports =  toJSON;

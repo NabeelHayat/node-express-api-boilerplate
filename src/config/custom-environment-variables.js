@@ -1,4 +1,4 @@
-export default {
+module.exports =  {
     env: 'NODE_ENV',
     app: {
         port: 'APP_PORT',

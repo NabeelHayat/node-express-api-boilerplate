@@ -1,9 +1,9 @@
-import httpStatus from 'http-status';
-import Promise from 'bluebird';
+const httpStatus = require('http-status');
+const Promise = require('bluebird');
 
-import Roles from '../helpers/roles';
-import { failureReponse } from './apiResponse';
-import { authenticateJwt } from '../shared/auth.service';
+const Roles = require('../helpers/roles');
+const { failureReponse } = require('./apiResponse');
+const { authenticateJwt } = require('../shared/auth.service');
 
 const handleJwt = (req, res, next, roles) => async (err, user, info) => {
     const error = err || info;
@@ -41,10 +41,10 @@ const handleJwt = (req, res, next, roles) => async (err, user, info) => {
     return next();
 };
 
-export const ADMIN = Roles.ADMIN;
-export const LOGGED_USER = Roles.LOGGED_USER;
+module.exports.ADMIN = Roles.ADMIN;
+module.exports.LOGGED_USER = Roles.LOGGED_USER;
 
-export const authorize =
+module.exports.authorize =
     (roles = [Roles.USER]) =>
     (req, res, next) =>
         authenticateJwt(handleJwt(req, res, next, roles))(req, res, next);

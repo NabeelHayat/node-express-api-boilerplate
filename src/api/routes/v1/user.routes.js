@@ -1,7 +1,7 @@
-import express from 'express';
+const express = require('express');
 
-import { ADMIN, LOGGED_USER, authorize } from '../../../middlewares/authenticate';
-import validate from '../../../middlewares/validate';
+const { ADMIN, LOGGED_USER, authorize } = require('../../../middlewares/authenticate');
+const validate = require('../../../middlewares/validate');
 
 const controller = require('../../controllers/user.controller');
 const { listUsers, createUser, replaceUser, updateUser } = require('../../validations/user.validation');
@@ -183,4 +183,4 @@ router
      */
     .delete(LOGGED_USER, controller.remove);
 
-export default router;
+module.exports =  router;

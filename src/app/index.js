@@ -1,26 +1,26 @@
-import express from 'express';
-import cors from 'cors';
-import morgan from 'morgan';
-import helmet from 'helmet';
-import compression from 'compression';
-import session from 'express-session';
-import MongoStore from 'connect-mongo';
-import nconf from 'nconf';
+const express = require('express');
+const cors = require('cors');
+const morgan = require('morgan');
+const helmet = require('helmet');
+const compression = require('compression');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+const config = require('config');
 
-import AuthService from '../shared/auth.service';
-import appRoutes from './app.routes';
-import { logStream } from '../utils/logger';
-import { errorConverter, errorHandler, notFound } from '../middlewares/errorHandler';
+const AuthService = require('../shared/auth.service');
+const appRoutes = require('./app.routes');
+const { logStream } = require('../utils/logger');
+const { errorConverter, errorHandler, notFound } = require('../middlewares/errorHandler');
 
 const app = express();
 
-app.set('port', nconf.app.port);
-app.set('host', nconf.app.host);
+app.set('port', config.app.port);
+app.set('host', config.app.host);
 
-app.locals.title = nconf.app.name;
-app.locals.version = nconf.app.version;
+app.locals.title = config.app.name;
+app.locals.version = config.app.version;
 
-if (nconf.env === 'development') {
+if (config.env === 'development') {
 	app.use(morgan('combined', { stream: logStream  }));
 }
 
@@ -40,7 +40,7 @@ app.use(helmet());
 app.use(
 	cors({
 		origin: [
-			`http://${nconf.app.host}:${nconf.app.port}`,
+			`http://${config.app.host}:${config.app.port}`,
 			'http://localhost:3000',
 			'http://localhost:5000',
 		],
@@ -52,10 +52,10 @@ app.use(
 // Enable authentication using session + passport
 app.use(
 	session({
-		secret: nconf.mongoose.url,
+		secret: config.mongoose.url,
 		resave: false,
 		saveUninitialized: true,
-		store: MongoStore.create({ mongoUrl: nconf.mongoose.url }),
+		store: MongoStore.create({ mongoUrl: config.mongoose.url }),
 		cookie: {
 			maxAge: 1000 * 60 * 60 * 24, // Equals 1 day (1 day * 24 hr/1 day * 60 min/1 hr * 60 sec/1 min * 1000 ms / 1 sec)
 		},
@@ -84,4 +84,4 @@ app.use(notFound);
 // error handler, send stacktrace only during development
 app.use(errorHandler);
 
-export default app;
+module.exports =  app;

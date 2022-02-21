@@ -1,4 +1,4 @@
-import paginate from './paginate.plugin';
-import toJSON from './toJson.plugin';
+const paginate = require('./paginate.plugin');
+const toJSON = require('./toJson.plugin');
 
-export { paginate, toJSON };
+module.exports = { paginate, toJSON };

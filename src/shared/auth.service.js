@@ -1,11 +1,11 @@
-import passport from 'passport';
-import LocalStrategy from 'passport-local';
-import nconf from 'nconf';
-import { Strategy as JWTStrategy, ExtractJwt } from 'passport-jwt';
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const config = require('config');
+const { Strategy, ExtractJwt } = require('passport-jwt');
 
-import User from '../models/user.model';
+const User = require('../models/user.model');
 
-export default (app) => {
+module.exports =  (app) => {
     /**
      * -------------- PASSPORT AUTHENTICATION ----------------.
      */
@@ -23,7 +23,7 @@ export default (app) => {
      *
      * passport.session() - This calls the Passport Authenticator using the "Session Strategy".  Here are the basic
      * steps that this method takes:
-     *      1.  Takes the MongoDB user ID obtained from the `passport.initialize()` method
+     *      1.  Takes the MongoDB user ID obtained = require(the `passport.initialize()` method
      *          (run directly before) and passes
      *          it to the `passport.deserializeUser()` function (defined above in this module).
      *          The `passport.deserializeUser()` function will look up the User by the given ID in
@@ -72,10 +72,10 @@ export default (app) => {
 
     const jwtOptions = {
         jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-        secretOrKey: nconf.jwt.secret
+        secretOrKey: config.jwt.secret
     };
 
-    const jwtStrategy = new JWTStrategy(jwtOptions, async (payload, done) => {
+    const jwtStrategy = new Strategy(jwtOptions, async (payload, done) => {
         try {
             // Identify user by ID
             const user = await User.findById(payload._id);
@@ -111,11 +111,11 @@ export default (app) => {
     passport.deserializeUser(User.deserializeUser());
 };
 
-export const authLocal = passport.authenticate('local', {
+module.exports.authLocal = passport.authenticate('local', {
     session: false
 });
 
-export const authenticateJwt = (callback) =>
+module.exports.authenticateJwt = (callback) =>
     passport.authenticate('jwt', {
         session: false,
         callback

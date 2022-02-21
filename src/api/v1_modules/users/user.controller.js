@@ -1,6 +1,6 @@
-import httpStatus from 'http-status';
-import { omit } from 'lodash';
-import User from '../../../models/user.model';
+const httpStatus = require('http-status');
+const { omit } = require('lodash');
+const User = require('../../../models/user.model');
 
 const UserController = {};
 
@@ -140,4 +140,4 @@ UserController.remove = (req, res, next) => {
         .catch((e) => next(e));
 };
 
-export default UserController;
+module.exports =  UserController;

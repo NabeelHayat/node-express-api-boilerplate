@@ -1,10 +1,10 @@
-import httpStatus from 'http-status';
-import expressValidation from 'express-validation';
-import mongoose from 'mongoose';
+const httpStatus = require('http-status');
+const expressValidation = require('express-validation');
+const mongoose = require('mongoose');
 
-import nconf from 'nconf';
-import APIError from '../helpers/APIError';
-import { failureReponse } from './apiResponse';
+const config = require('config');
+const APIError = require('../helpers/APIError');
+const { failureReponse } = require('./apiResponse');
 
 /**
  * Error handler. Send stacktrace only during development.
@@ -15,14 +15,14 @@ import { failureReponse } from './apiResponse';
  * @param {Response} res
  * @param {Next} next
  */
-export const errorHandler = (err, req, res, next) => {
+module.exports.errorHandler = (err, req, res, next) => {
     const message = err.message || httpStatus[err.status];
 
     const response = failureReponse(err.status, message, err.errors);
 
     const result = {
         ...response,
-        ...(nconf.env !== 'production' && { stack: err.stack })
+        ...(config.env !== 'production' && { stack: err.stack })
     };
 
     res.status(err.status).json(result);
@@ -37,7 +37,7 @@ export const errorHandler = (err, req, res, next) => {
  * @param res
  * @param next
  */
-export const errorConverter = (err, req, res, next) => {
+module.exports.errorConverter = (err, req, res, next) => {
     let error = err;
 
     if (err instanceof expressValidation.ValidationError) {
@@ -63,7 +63,7 @@ export const errorConverter = (err, req, res, next) => {
  * @param res
  * @param next
  */
-export const notFound = (req, res, next) => {
+module.exports.notFound = (req, res, next) => {
     const err = new APIError('not Found', httpStatus.NOT_FOUND, {});
 
     return errorHandler(err, req, res);

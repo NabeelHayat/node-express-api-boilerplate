@@ -1,4 +1,4 @@
-export default config = {
+module.exports = {
     env: 'development',
     app: {
         port: 8848,
@@ -11,7 +11,7 @@ export default config = {
         secret: 'DopelSuperCoolAndAwosomeSecretForAuthorization'
     },
     mongoose: {
-        url: '',
+        url: 'mongodb+srv://admin:uIDFyzWVLk3X9BGC@cluster0.u714h.mongodb.net/dopel-appservices?retryWrites=true&w=majority',
         debug: false,
         options: {
             useNewUrlParser: true,

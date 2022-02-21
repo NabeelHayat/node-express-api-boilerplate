@@ -1,5 +1,5 @@
 // eslint-disable-next-line max-classes-per-file
-import httpStatus from 'http-status';
+const httpStatus = require('http-status');
 
 /**
  * @augments Error
@@ -38,4 +38,4 @@ class APIError extends ExtendableError {
     }
 }
 
-export default APIError;
+module.exports =  APIError;

@@ -9,4 +9,4 @@ const password = (value, helpers) => {
     return value;
 };
 
-export { password };
+module.exports = { password };

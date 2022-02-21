@@ -1,5 +1,5 @@
-import { Router } from 'express';
-import authRouter from './auth.routes';
+const { Router } = require('express');
+const authRouter = require('./auth.routes');
 
 const router = Router();
 
@@ -8,4 +8,4 @@ const router = Router();
 // ---------------------------------------------------------
 router.use('/auth', authRouter);
 
-export default router;
+module.exports =  router;

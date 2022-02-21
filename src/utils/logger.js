@@ -1,8 +1,8 @@
-import winston from 'winston';
+const winston = require('winston');
 
-import nconf from 'nconf';
+const config = require('config');
 
-const env = nconf.env;
+const env = config.env;
 
 // define the custom settings for each transport (file, console)
 const options = {
@@ -48,7 +48,7 @@ if (env !== 'production') {
 }
 
 // create a stream object with a 'write' function that will be used by `morgan`
-export const logStream = {
+module.exports.logStream = {
     // eslint-disable-next-line no-unused-vars
     write: function (message, encoding) {
         // use the 'info' log level so the output will be picked up by both transports (file and console)
@@ -91,4 +91,4 @@ const logSilly = (message) => {
     logger.silly(processMessage(message, Colors.silly));
 };
 
-export { logInfo, logError, logDebug, logWarn, logVerbose, logSilly };
+module.exports = { logInfo, logError, logDebug, logWarn, logVerbose, logSilly };

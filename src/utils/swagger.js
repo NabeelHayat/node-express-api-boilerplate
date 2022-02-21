@@ -1,15 +1,14 @@
-import path from 'path';
-import swaggerJSDoc from 'swagger-jsdoc';
-require('../config');
-import nconf from 'nconf';
+const path = require('path');
+const swaggerJSDoc = require('swagger-jsdoc');
+const config = require('config');
 /**
  * Swagger definition.
  */
 const swaggerDefinition = {
     info: {
-        title: nconf.app.name,
-        version: nconf.app.version,
-        description: nconf.app.description
+        title: config.app.name,
+        version: config.app.version,
+        description: config.app.description
     },
     basePath: '/api'
 };
@@ -18,7 +17,7 @@ const swaggerDefinition = {
  * Options for the swagger docs.
  */
 const swaggerOptions = {
-    // import swaggerDefinitions
+    // const swaggerDefinitions
     swaggerDefinition: swaggerDefinition,
     // path to the API docs
     apis: [
@@ -34,4 +33,4 @@ const swaggerOptions = {
  */
 const swaggerSpec = swaggerJSDoc(swaggerOptions);
 
-export default swaggerSpec;
+module.exports =  swaggerSpec;

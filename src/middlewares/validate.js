@@ -1,7 +1,7 @@
-import Joi from 'joi';
-import httpStatus from 'http-status';
-import pick from '../helpers/pick';
-import APIError from '../helpers/APIError';
+const Joi = require('joi');
+const httpStatus = require('http-status');
+const pick = require('../helpers/pick');
+const APIError = require('../helpers/APIError');
 
 const validate = (schema) => (req, res, next) => {
     const validSchema = pick(schema, ['params', 'query', 'body']);
@@ -20,4 +20,4 @@ const validate = (schema) => (req, res, next) => {
     return next();
 };
 
-export default validate;
+module.exports =  validate;

@@ -1,5 +1,5 @@
-import { Router } from 'express';
-import v1Router from './v1';
+const { Router } = require('express');
+const v1Router = require('./v1');
 
 const router = Router();
 
@@ -13,4 +13,4 @@ router.use('/v1', v1Router);
  */
 router.get('/status', (req, res) => res.send('OK'));
 
-export default router;
+module.exports =  router;

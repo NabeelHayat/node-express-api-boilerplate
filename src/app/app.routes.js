@@ -1,9 +1,8 @@
-require('./config/config');
-import { Router } from 'express';
-import apiRoutes from '../api/routes';
-import nconf from 'nconf';
-import { authLimiter } from '../middlewares/apiLimiter';
-import swaggerSpec from '../utils/swagger';
+const { Router } = require('express');
+const apiRoutes = require('../api/routes');
+const config = require('config');
+const { authLimiter } = require('../middlewares/apiLimiter');
+const swaggerSpec = require('../utils/swagger');
 
 /**
  * Contains all API routes for the application.
@@ -11,7 +10,7 @@ import swaggerSpec from '../utils/swagger';
 const router = Router();
 
 // limit repeated failed requests to auth endpoints
-if (nconf.env === 'production') {
+if (config.env === 'production') {
     router.use('/api/v1/auth', authLimiter);
 }
 
@@ -38,4 +37,4 @@ router.get('/', (req, res) => {
 /** GET /health-check - Check service health */
 router.get('/health-check', (req, res) => res.json('OK'));
 
-export default router;
+module.exports =  router;

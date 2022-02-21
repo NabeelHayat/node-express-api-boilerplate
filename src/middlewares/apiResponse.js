@@ -17,4 +17,4 @@ const failureReponse = (statusCode, message, errors) => {
     return generateResponse(statusCode, message, null, errors);
 };
 
-export { successReponse, failureReponse };
+module.exports = { successReponse, failureReponse };
