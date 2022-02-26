@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const apiRoutes = require('../api/routes');
+const apiRoutes = require('../api/v1/routes');
 const config = require('config');
 const { authLimiter } = require('../middlewares/apiLimiter');
 const swaggerSpec = require('../utils/swagger');
